@@ -29,10 +29,22 @@ jobs:
           echo "Streak: $NEW_COUNT days" >> "$FILE"
           echo "Last updated: $TODAY" >> "$FILE"
 
-      - name: Commit and push
+      - name: Commit and push with varying intensity
         run: |
           git config user.name "github-streak[bot]"
           git config user.email "github-streak[bot]@users.noreply.github.com"
+          TODAY=$(date +%Y-%m-%d)
+
+          # Random number of extra commits: 0 to 7 (1 original + up to 7 = max 8 total)
+          EXTRA=$((RANDOM % 8))
+
           git add -A
-          git diff --staged --quiet || git commit -m "streak: update $(date +%Y-%m-%d)"
+          git commit -m "streak: update $TODAY"
+
+          for i in $(seq 1 $EXTRA); do
+            echo "$TODAY - commit #$i" >> streak.md
+            git add -A
+            git commit -m "streak: $TODAY (#$i)"
+          done
+
           git push
