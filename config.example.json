@@ -1,0 +1,8 @@
+{
+  "repo_url": "https://github.com/ZeniX-ally/github-streak.git",
+  "repo_dir": "F:\\Programe\\github-streak\\repo",
+  "commit_interval": [9, 22],
+  "max_commits_per_run": 8,
+  "enabled": true,
+  "token": ""
+}
